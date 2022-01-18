@@ -183,6 +183,7 @@ services:
           - 8096:8096
         labels:
           - com.centurylinklabs.watchtower.enable=true
+          - traefik.enable=false
         network_mode: "host"
         environment:
           - PUID=${PUID}
@@ -192,7 +193,7 @@ services:
           - ${CONTAINERS}/jellyfin/config:/config
           - ${CONTAINERS}/jellyfin/cache:/cache
           - ${CONTAINERS}/jellyfin/media:/media
-          - ${CONTAINERS}/jellyfin//media2:/media2:ro
+          - ${CONTAINERS}/jellyfin/media2:/media2:ro
         restart: "unless-stopped"
         
 networks:
