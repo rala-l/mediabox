@@ -182,8 +182,12 @@ services:
         ports:
           - 8096:8096
         labels:
-          - com.centurylinklabs.jellyfin.enable=true
-          - traefik.enable=false
+          - com.centurylinklabs.watchtower.enable=true
+          - traefik.enable=true
+          - traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)
+          - traefik.http.routers.plex.entrypoints=websecured
+          - traefik.http.services.plex.loadbalancer.server.port=32400
+          - traefik.http.routers.plex.tls.certresolver=myresolver
         network_mode: "host"
         environment:
           - PUID=${PUID}
