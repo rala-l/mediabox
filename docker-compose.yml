@@ -182,7 +182,7 @@ services:
         ports:
           - 8096:8096
         labels:
-          - com.centurylinklabs.watchtower.enable=true
+          - com.centurylinklabs.jellyfin.enable=true
           - traefik.enable=false
         network_mode: "host"
         environment:
