@@ -173,32 +173,32 @@ services:
       - ${CONTAINERS}/organizr:/config
     restart: unless-stopped
     
-    jellyfin:
-        image: jellyfin/jellyfin
-        container_name: jellyfin
-        networks:
-          default:
-            ipv4_address: 172.20.2.124
-        ports:
-          - 8096:8096
-        labels:
-          - com.centurylinklabs.watchtower.enable=true
-          - traefik.enable=true
-          - traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)
-          - traefik.http.routers.plex.entrypoints=websecured
-          - traefik.http.services.plex.loadbalancer.server.port=32400
-          - traefik.http.routers.plex.tls.certresolver=myresolver
-        network_mode: "host"
-        environment:
-          - PUID=${PUID}
-          - PGID=${PGID}
-          - TZ=${TIMEZONE}
-        volumes:
-          - ${CONTAINERS}/jellyfin/config:/config
-          - ${CONTAINERS}/jellyfin/cache:/cache
-          - ${CONTAINERS}/jellyfin/media:/media
-          - ${CONTAINERS}/jellyfin/media2:/media2:ro
-        restart: "unless-stopped"
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    networks:
+      default:
+        ipv4_address: 172.20.2.124
+    ports:
+      - 8096:8096
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)
+      - traefik.http.routers.plex.entrypoints=websecured
+      - traefik.http.services.plex.loadbalancer.server.port=32400
+      - traefik.http.routers.plex.tls.certresolver=myresolver
+    network_mode: "host"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${CONTAINERS}/jellyfin/config:/config
+      - ${CONTAINERS}/jellyfin/cache:/cache
+      - ${CONTAINERS}/jellyfin/media:/media
+      - ${CONTAINERS}/jellyfin/media2:/media2:ro
+    restart: "unless-stopped"
         
 networks:
   default:
