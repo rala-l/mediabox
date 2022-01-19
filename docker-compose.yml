@@ -23,10 +23,6 @@ services:
       - jackett
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.sonarr.rule=Host(`sonarr.${DOMAIN}`)
-      - traefik.http.routers.sonarr.entrypoints=websecured
-      - traefik.http.routers.sonarr.tls.certresolver=myresolver
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -49,10 +45,6 @@ services:
       - jackett
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.radarr.rule=Host(`radarr.${DOMAIN}`)
-      - traefik.http.routers.radarr.entrypoints=websecured
-      - traefik.http.routers.radarr.tls.certresolver=myresolver
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -76,10 +68,6 @@ services:
       - radarr
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.bazarr.rule=Host(`bazarr.${DOMAIN}`)
-      - traefik.http.routers.bazarr.entrypoints=websecured
-      - traefik.http.routers.bazarr.tls.certresolver=myresolver
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -99,10 +87,6 @@ services:
       - 9117:9117
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.jackett.rule=Host(`jackett.${DOMAIN}`)
-      - traefik.http.routers.jackett.entrypoints=websecured
-      - traefik.http.routers.jackett.tls.certresolver=myresolver
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -123,11 +107,6 @@ services:
       - 8000:8000
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.portainer.rule=Host(`portainer.${DOMAIN}`)
-      - traefik.http.routers.portainer.entrypoints=websecured
-      - traefik.http.routers.portainer.tls.certresolver=myresolver
-      - traefik.http.services.portainer.loadbalancer.server.port=9000
     restart: always
     command: -H unix:///var/run/docker.sock
     volumes:
@@ -148,8 +127,6 @@ services:
     restart: always
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=false
-
   organizr:
     image: organizr/organizr
     container_name: organizr
@@ -160,11 +137,6 @@ services:
       - 9983:80
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.orzanizr.rule=Host(`organizr.${DOMAIN}`) || Host(`mediabox.${DOMAIN}`)
-      - traefik.http.routers.orzanizr.entrypoints=websecured
-      - traefik.http.routers.orzanizr.tls.certresolver=myresolver
-      - traefik.http.services.organizr.loadbalancer.server.port=80
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -178,16 +150,11 @@ services:
     container_name: jellyfin
     networks:
       default:
-        ipv4_address: 172.20.2.124
+        ipv4_address: 172.20.2.5
     ports:
       - 8096:8096
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=true
-      - traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)
-      - traefik.http.routers.plex.entrypoints=websecured
-      - traefik.http.services.plex.loadbalancer.server.port=32400
-      - traefik.http.routers.plex.tls.certresolver=myresolver
     network_mode: "host"
     environment:
       - PUID=${PUID}
