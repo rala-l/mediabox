@@ -127,8 +127,6 @@ services:
     restart: always
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.enable=false
-
   organizr:
     image: organizr/organizr
     container_name: organizr
@@ -152,7 +150,7 @@ services:
     container_name: jellyfin
     networks:
       default:
-        ipv4_address: 172.20.2.124
+        ipv4_address: 172.20.2.5
     ports:
       - 8096:8096
     labels:
